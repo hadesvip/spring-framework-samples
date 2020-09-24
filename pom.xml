@@ -8,6 +8,10 @@
   <groupId>com.kevin</groupId>
   <artifactId>spring-framework-samples</artifactId>
   <version>1.0-SNAPSHOT</version>
+  <modules>
+    <module>spring-framework-ioc-sample</module>
+    <module>quickstart</module>
+  </modules>
   <packaging>pom</packaging>
   <name>spring-framework-samples</name>
 
@@ -15,6 +19,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
+    <spring.version>5.2.8.RELEASE</spring.version>
+    <javax.version>3.1.0</javax.version>
   </properties>
 
   <dependencies>
@@ -24,14 +30,23 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
-
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>3.1.0</version>
-      <scope>provided</scope>
-    </dependency>
   </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>${javax.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
 
   <build>
     <plugins>
@@ -40,9 +55,9 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.2</version>
         <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-          <encoding>UTF-8</encoding>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
+          <encoding>${project.build.sourceEncoding}</encoding>
         </configuration>
       </plugin>
     </plugins>
